@@ -1,12 +1,6 @@
 function search(needle, haystack) {
   if (needle === haystack) return true;
 
-  if (Array.isArray(haystack)) {
-    return haystack.some(function (item) {
-      return search(needle, item);
-    });
-  }
-
   if (typeof haystack === 'object') {
     return Object.keys(haystack).some(function (key) {
       return search(needle, haystack[key]);
