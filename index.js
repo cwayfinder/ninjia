@@ -91,6 +91,31 @@ function reverse(str) {
   return result;
 }
 
+function decrease(number) {
+  var result = String(number);
+
+  var halfSize = Math.floor(result.length / 2);
+
+  var replacement;
+  var i = 0;
+  for (i = 0; i < halfSize; i++) {
+    replacement = result.substr(halfSize - i, 1 + (i * 2));
+    //console.log(result.substr(0, halfSize - i), replacement, result.substr(halfSize + 1 + i));
+    if (parseInt(replacement)) {
+      break;
+    }
+  }
+
+  replacement = (replacement.charAt(0) - 1) + replacement.substr(1);
+  if (replacement.length > 1) {
+    replacement = replacement.substr(0, replacement.length - 1) + (replacement.charAt(replacement.length - 1) - 1);
+  }
+
+  var offset = (result.length - replacement.length)/2;
+  result = result.substr(0, offset) + replacement + result.substr(-offset);
+  return Number(result);
+}
+
 function biggestPrimePalindrome(size) {
   // Задание №4. Самое сложное. Если вы только пришли в мир JS и не успеете решить его до субботы - не расстраивайтесь.
   // Но очень постарайтесь :)
@@ -114,5 +139,25 @@ function biggestPrimePalindrome(size) {
 
 
   //Замените код ниже на ваш код
-  return -1;
+  // return -1;
+
+  if (size % 2 == 0) {
+    size--;
+  }
+
+   var result = '9'.repeat(size);
+  //var result = Number('99999');
+
+  // var middle = result[size];
+  // result[size] = result[size]--;
+
+  while (!isPrime(result)) {
+    //console.log('tick', result);
+    result = decrease(result);
+  }
+
+  return result;
 }
+
+ console.log('biggest', biggestPrimePalindrome(7));
+//console.log('decrease', decrease(9990999))
