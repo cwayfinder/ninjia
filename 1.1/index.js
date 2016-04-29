@@ -23,14 +23,9 @@ function isPrime(number) {
 }
 
 function reverse(str) {
-  var result = '';
-  var i;
-
-  for (i = str.length - 1; i >= 0; i--) {
-    result += str[i];
-  }
-
-  return result;
+  return Array.prototype.reduce.call(str, function(result, char) {
+    return char + result;
+  }, '');
 }
 
 function decrement(number) {
