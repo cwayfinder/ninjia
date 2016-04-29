@@ -22,48 +22,25 @@ function isPrime(number) {
   return true;
 }
 
-function getMutablePart(str) {
-  var halfSize = Math.floor(str.length / 2);
-
-  var result;
+function reverse(str) {
+  var result = '';
   var i;
-  for (i = 0; i <= halfSize; i++) {
-    result = str.substr(halfSize - i, 1 + (i * 2));
-    if (parseInt(result, 10)) {
-      break;
-    }
-  }
-  return result;
-}
 
-function decreaseFirstAndLastDigit(str) {
-  var char = str.charAt(0) - 1;
-
-  var result = char + str.substr(1);
-  if (str.length > 1) {
-    result = result.substr(0, str.length - 1) + char;
+  for (i = str.length - 1; i >= 0; i--) {
+    result += str[i];
   }
 
   return result;
 }
 
-function replaceMiddle(str, middle) {
-  var offset = (str.length - middle.length) / 2;
-  return str.substr(0, offset) + middle + str.substr(-offset);
-}
+function decrement(number) {
+  var str = String(number);
 
-function decrease(number) {
-  var result = String(number);
-  var middle = getMutablePart(result);
+  var halfSize = Math.ceil(str.length / 2);
+  var first = String(parseInt(str.substr(0, halfSize), 10) - 1);
+  var second = reverse(first.substr(0, halfSize - 1));
 
-  middle = decreaseFirstAndLastDigit(middle);
-
-  if (result.length > middle.length) {
-    result = replaceMiddle(result, middle);
-  } else {
-    result = middle;
-  }
-  return Number(result);
+  return Number(first + second);
 }
 
 function biggestPrimePalindrome(size) {
@@ -76,17 +53,18 @@ function biggestPrimePalindrome(size) {
   }
 
   for (i = maxSize; i > 0; i -= 2) {
-    result = '9'.repeat(i);
+    result = parseInt('9'.repeat(i), 10);
 
-    while (parseInt(result, 10)) {
+    while (result > 0) {
       if (isPrime(result)) {
         return result;
       }
-      result = decrease(result);
+      result = decrement(result);
     }
   }
 
   return result;
 }
 
+console.log('biggest', biggestPrimePalindrome(1));
 console.log('biggest', biggestPrimePalindrome(9));
