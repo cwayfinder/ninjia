@@ -32,7 +32,7 @@ function decrement(number) {
   var str = String(number);
 
   var halfSize = Math.ceil(str.length / 2);
-  var first = String(parseInt(str.substr(0, halfSize), 10) - 1);
+  var first = String(Number(str.substr(0, halfSize)) - 1);
   var second = reverse(first.substr(0, halfSize - 1));
 
   return Number(first + second);
@@ -48,7 +48,7 @@ function biggestPrimePalindrome(size) {
   }
 
   for (i = maxSize; i > 0; i -= 2) {
-    result = parseInt('9'.repeat(i), 10);
+    result = Number('9'.repeat(i));
 
     while (result > 0) {
       if (isPrime(result)) {
