@@ -3,7 +3,7 @@ function equals(a, b) {
 
   if (a === b) return true;
 
-  if (typeof a === 'object') {
+  if (typeof a === 'object' && typeof b === 'object') {
     callback = function (key) {
       return equals(a[key], b[key]);
     };
@@ -13,6 +13,7 @@ function equals(a, b) {
   return false;
 }
 
+console.log(equals({ a: {} }, { a: 2 })); // false
 console.log(equals({ a: 3, b: 5, c: 9 }, { a: 3, b: 5, c: 9 })); // true
 console.log(equals({ a: 3, b: 5, c: 9 }, { a: 3, b: 5, c: 9 })); // false
 console.log(equals({ a: 3, b: { 5: 'c', s: 5 }, c: 9 }, { a: 3, b: { u: 8, 5: 'c', s: 5 }, c: 9 })); // true
