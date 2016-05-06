@@ -7,7 +7,8 @@ function formatKey(key) {
 }
 
 function joinKey(parent, child) {
-  return child.startsWith('[') ? (parent + child) : (parent + '.' + child);
+  var delimiter = child.startsWith('[') ? '' : '.';
+  return parent + delimiter + child;
 }
 
 function search(needle, haystack) {
